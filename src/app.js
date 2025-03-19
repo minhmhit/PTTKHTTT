@@ -14,19 +14,19 @@ app.set('views', path.join(__dirname,'views'));
 
 // middleware
 
-// app.use(express.json());
-// app.use(express.urlencoded({extends: false}));
+app.use(express.json());
+app.use(express.urlencoded({extends: false}));
 
 app.use(express.static(path.join(__dirname,'public')));
 
 
 // sension va flash
-// app.use(session({
-//     secret: 'your-secret-key', // Thay đổi secret cho phù hợp
-//     resave: false,
-//     saveUninitialized: true,
-//   }));
-//   app.use(flash());
+app.use(session({
+    secret: 'your-secret-key', // Thay đổi secret cho phù hợp
+    resave: false,
+    saveUninitialized: true,
+  }));
+  app.use(flash());
 
 //route
 
