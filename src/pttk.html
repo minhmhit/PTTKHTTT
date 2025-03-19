@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quán Cà Phê</title>
+    <link rel="stylesheet" href="pttk.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <!-- Thanh điều hướng -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="pic/logo.png" alt="Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm...">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Đánh giá</a></li>
+            <li><a href="#">Cửa Hàng</a></li>
+            <li><a href="#">Tuyển Dụng</a></li>
+        </ul>
+    </nav>
+    <!-- Banner -->
+    <div class="container">
+        <div class="carousel">
+            <button class="prev-btn">&#10094;</button>
+            <div class="carousel-wrapper">
+                <div class="carousel-item active">
+                    <img src="pic/banner1.png" alt="Khuyến mãi 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="pic/banner2.png" alt="Khuyến mãi 2">
+                </div>
+            </div>
+            <button class="next-btn">&#10095;</button>
+        </div>
+        <div class="sidebar">
+            <img src="pic/discount.png" alt="Ưu đãi" class="promo-img">
+        </div>
+    </div>
+    <!-- Danh sách sản phẩm -->
+    <h2 class="section-title">Menu</h2>
+    <div class="filter-container">
+        <label for="filter">Lọc sản phẩm:</label>
+        <select id="filter" onchange="filterProducts()">
+            <option value="all">Tất cả</option>
+            <option value="hat">Cà phê hạt</option>
+            <option value="bot">Cà phê bột</option>
+            <option value="goi">Cà phê gói</option>
+        </select>
+        <label for="price-filter">Giá tiền:</label>
+        <select id="price-filter" onchange="filterProducts()">
+            <option value="all">Tất cả</option>
+            <option value="duoi50">Dưới 50,000đ</option>
+            <option value="tren50">Trên 50,000đ</option>
+        </select>
+        <label for="origin-filter">Xuất xứ:</label>
+        <select id="origin-filter" onchange="filterProducts()">
+            <option value="all">Tất cả</option>
+            <option value="vn">Việt Nam</option>
+            <option value="brazil">Brazil</option>
+            <option value="colombia">Colombia</option>
+        </select>
+    </div>
+    <section class="products">
+        <div class="product" data-type="hat" data-price="50000" data-origin="Vietnam">
+            <img src="pic/robusta.jpg" alt="Cà phê Robusta">
+            <h2>Cà phê Robusta</h2>
+            <p>Giá: 50,000đ</p>
+        </div>
+        <div class="product" data-type="hat" data-price="55000" data-origin="Brazil">
+            <img src="pic/arabica.jpg" alt="Cà phê Arabica">
+            <h2>Cà phê Arabica</h2>
+            <p>Giá: 55,000đ</p>
+        </div>
+        <div class="product" data-type="hat" data-price="50000" data-origin="Vietnam">
+            <img src="pic/culi.png" alt="Cà phê Culi">
+            <h2>Cà phê Culi</h2>
+            <p>Giá: 50,000đ</p>
+        </div>
+        <div class="product" data-type="hat" data-price="55000" data-origin="Colombia">
+            <img src="pic/moka.jpg" alt="Cà phê Moka">
+            <h2>Cà phê Moka</h2>
+            <p>Giá: 55,000đ</p>
+        </div>
+        <div class="product" data-type="hat" data-price="50000" data-origin="Vietnam">
+            <img src="pic/catimor.jpg" alt="Cà phê Catimor">
+            <h2>Cà phê Catimor</h2>
+            <p>Giá: 50,000đ</p>
+        </div>
+        <div class="product" data-type="hat" data-price="55000" data-origin="Brazil">
+            <img src="pic/bourbon.jpg" alt="Cà phê Bourbon">
+            <h2>Cà phê Bourbon</h2>
+            <p>Giá: 55,000đ</p>
+        </div>
+        <div class="product" data-type="hat" data-price="50000" data-origin="Vietnam">
+            <img src="pic/typica.jpg" alt="Cà phê Typica">
+            <h2>Cà phê Typica</h2>
+            <p>Giá: 50,000đ</p>
+        </div>
+        <div class="product" data-type="hat" data-price="55000" data-origin="Indonesia">
+            <img src="pic/liberica.jpg" alt="Cà phê Liberica">
+            <h2>Cà phê Liberica</h2>
+            <p>Giá: 55,000đ</p>
+        </div>
+    </section>
+    <div class="pagination">
+        <button onclick="prevPage()">&#10094; Trước</button>
+        <span id="page-info">Trang 1</span>
+        <button onclick="nextPage()">Sau &#10095;</button>
+    </div>
+
+    <!-- Phần "Đánh giá" -->
+    <section class="stories">
+        <h2>Đánh giá</h2>
+
+        <article class="story">
+            <img src="pic/khach1.jpg" alt="User 1" class="story-img">
+            <div class="story-content">
+                <h3>Tôi thích ông chủ</h3>
+                <p>Guli guli wacha lingangu lingangu</p>
+            </div>
+        </article>
+        <article class="story">
+            <img src="pic/khach2.jpg" alt="User 2" class="story-img">
+            <div class="story-content">
+                <h3>Focus on ur career</h3>
+                <p>No cash big problem !!!</p>
+            </div>
+        </article>
+
+        <article class="story">
+            <img src="pic/khach3.jpg" alt="User 3" class="story-img">
+            <div class="story-content">
+                <h3>Vẫn là tôi</h3>
+                <p>Cà phê ngon nhưng không ngon bằng mẹ ông</p>
+            </div>
+        </article>
+    </section>
+    <!-- Chân trang -->
+    <footer>
+        <p>&copy; 2025 Quán Cà Phê. Mọi quyền được bảo lưu.</p>
+        <p>Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM</p>
+        <p>Email: lienhe@quancaphe.com | Điện thoại: 0123 456 789</p>
+    </footer>
+
+    <!-- Thêm JavaScript nếu cần -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>
