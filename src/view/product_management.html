@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm</title>
+    <link rel="stylesheet" href="product_management.css"> 
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="product_do.html">Sản phẩm</a></li>
+            <li><a href="about.html">Giới thiệu</a></li>
+        </ul>
+        <div class="search-container">
+            <input type="text" placeholder="Tìm kiếm sản phẩm...">
+            <i class="fa fa-search"></i>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Quản lý Sản phẩm</h2>
+
+        <!-- Nút thêm sản phẩm -->
+        <div class="admin-buttons">
+            <button class="btn add-btn" onclick="openModal()">Thêm Sản phẩm</button>
+        </div>
+
+        <!-- Bảng danh sách sản phẩm -->
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="product-list">
+                <!-- Danh sách sản phẩm sẽ được thêm bằng JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal thêm/sửa sản phẩm -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Thêm Sản phẩm</h3>
+            <label for="productName">Tên sản phẩm:</label>
+            <input type="text" id="productName">
+            
+            <label for="productPrice">Giá:</label>
+            <input type="number" id="productPrice">
+            
+            <label for="productImage">URL Hình ảnh:</label>
+            <input type="text" id="productImage">
+
+            <button class="submit-btn" onclick="saveProduct()">Lưu</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Quản lý Sản phẩm
+    </footer>
+
+</body>
+</html>
