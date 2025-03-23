@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div id="login-form" class="form-box active">
+            <h2>Đăng Nhập</h2>
+            <input type="text" id="login-username" placeholder="Tên đăng nhập">
+            <input type="password" id="login-password" placeholder="Mật khẩu">
+            <button id="login-btn">Đăng Nhập</button>
+            <p>Chưa có tài khoản? <a href="#" id="toggle-register">Đăng ký</a></p>
+        </div>
+
+        <div id="register-form" class="form-box">
+            <h2>Đăng Ký</h2>
+            <input type="text" id="register-username" placeholder="Tên đăng nhập">
+            <input type="email" id="register-email" placeholder="Email">
+            <input type="password" id="register-password" placeholder="Mật khẩu">
+            <button id="register-btn">Đăng Ký</button>
+            <p>Đã có tài khoản? <a href="#" id="toggle-login">Đăng nhập</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.getElementById("login-form");
+            const registerForm = document.getElementById("register-form");
+            const toggleLogin = document.getElementById("toggle-login");
+            const toggleRegister = document.getElementById("toggle-register");
+
+            // Chuyển đổi giữa form đăng nhập & đăng ký
+            toggleLogin.addEventListener("click", function (event) {
+                event.preventDefault();
+                loginForm.classList.add("active");
+                registerForm.classList.remove("active");
+            });
+
+            toggleRegister.addEventListener("click", function (event) {
+                event.preventDefault();
+                registerForm.classList.add("active");
+                loginForm.classList.remove("active");
+            });
+
+            // Tạo tài khoản admin mặc định nếu chưa có
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            if (!users.some(user => user.username === "admin")) {
+                users.push({ username: "admin", password: "1", role: "admin" });
+                localStorage.setItem("users", JSON.stringify(users));
+                console.log("Admin account created: admin / 1");
+            }
+
+            // Xử lý đăng ký
+            document.getElementById("register-btn").addEventListener("click", function () {
+                const regUsername = document.getElementById("register-username").value.trim();
+                const regEmail = document.getElementById("register-email").value.trim();
+                const regPassword = document.getElementById("register-password").value.trim();
+
+                if (!regUsername || !regEmail || !regPassword) {
+                    alert("Vui lòng nhập đầy đủ thông tin!");
+                    return;
+                }
+
+                let users = JSON.parse(localStorage.getItem("users")) || [];
+                
+                if (users.some(user => user.username === regUsername)) {
+                    alert("Tên đăng nhập đã tồn tại!");
+                    return;
+                }
+
+                users.push({ username: regUsername, email: regEmail, password: regPassword, role: "user" });
+                localStorage.setItem("users", JSON.stringify(users));
+
+                alert("Đăng ký thành công! Hãy đăng nhập.");
+                loginForm.classList.add("active");
+                registerForm.classList.remove("active");
+            });
+
+            // Xử lý đăng nhập
+            document.getElementById("login-btn").addEventListener("click", function () {
+                const loginUsername = document.getElementById("login-username").value.trim();
+                const loginPassword = document.getElementById("login-password").value.trim();
+
+                let users = JSON.parse(localStorage.getItem("users")) || [];
+                const validUser = users.find(user => user.username === loginUsername && user.password === loginPassword);
+
+                if (validUser) {
+                    alert("Đăng nhập thành công!");
+                    if (validUser.role === "admin") {
+                        window.location.href = "admin.html"; // Admin vào trang admin
+                    } else {
+                        window.location.href = "pttk.html"; // User vào trang user
+                    }
+                } else {
+                    alert("Sai tên đăng nhập hoặc mật khẩu!");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('pic/coffee-bg.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background: rgba(255, 248, 240, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+input {
+    width: calc(100% - 24px); /* Trừ đi padding để giữ form đồng đều */
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #A67B5B;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #FFF8F0;
+    display: block; /* Đảm bảo input không bị inline */
+    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #5C3D2E;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #A67B5B;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #FFF8F0;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #8B5E3C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #5C3D2E;
+}
+
+p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #5C3D2E;
+}
+
+a {
+    color: #8B5E3C;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.form-box {
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+
+.form-box.active {
+    display: block;
+}
