@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteBase /coffee/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+
+# Bảo vệ các file chỉ dành cho máy chủ
+<Files config/database.php>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files .htaccess>
+    Order Allow,Deny
+    Deny from all
+</Files>
