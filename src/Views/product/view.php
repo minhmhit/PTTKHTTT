@@ -1,7 +1,7 @@
 
 <?php 
-require_once '../../config/app.php';
-require_once '../../config/database.php';
+// require_once '../../config/app.php';
+// require_once '../../config/database.php';
 require_once APP_ROOT . '/Views/layouts/header.php'; ?>
 <h1><?php echo $data['product']['name']; ?></h1>
 <div class="row">

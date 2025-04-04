@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Chuyển hướng tất cả yêu cầu đến thư mục public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

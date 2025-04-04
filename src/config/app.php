@@ -2,7 +2,9 @@
 // Cấu hình ứng dụng
 define('BASE_URL', 'http://localhost/PTTKHTTT/PTTKHTTT/src/');
 define('SITE_NAME', 'Coffee Shop');
-define('APP_ROOT', dirname(dirname(__FILE__)));
+if (!defined('APP_ROOT')) {
+    define('APP_ROOT', dirname(dirname(__DIR__)));
+}
 
 // Cấu hình session
 session_start();

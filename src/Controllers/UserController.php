@@ -189,11 +189,11 @@ class UserController {
         unset($_SESSION['user_role']);
         
         session_destroy();
-        
+        setFlash('success', 'Đăng xuất thành công');
         // Chuyển hướng đến trang đăng nhập
         redirect('user/login');
     }
-    
+   
     // Hiển thị và cập nhật hồ sơ người dùng
     public function profile() {
         // Kiểm tra đăng nhập
@@ -258,6 +258,7 @@ class UserController {
                 'title' => 'Hồ sơ người dùng - ' . SITE_NAME
             ];
         }
+        
         
         // Load view
         require_once APP_ROOT . '/Views/layouts/header.php';

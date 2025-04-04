@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '/Views/layouts/header.php'; ?>
+<?php require_once __DIR__ . '/../layouts/header.php'; ?>
 <h1>Danh sách sản phẩm</h1>
 <div class="row">
     <?php foreach ($data['products'] as $product): ?>
@@ -14,4 +14,4 @@
     </div>
     <?php endforeach; ?>
 </div>
-<?php require_once APP_ROOT . '/Views/layouts/footer.php'; ?>
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>

@@ -1,10 +1,14 @@
 <?php
 
-require_once '../config/app.php';
-require_once '../config/database.php';
+// Định nghĩa APP_ROOT
+define('APP_ROOT', dirname(__DIR__));
 
+// Nạp cấu hình
+require_once APP_ROOT . '/config/app.php';
+require_once APP_ROOT . '/config/database.php';
 
-
+// Khởi động session
+// session_start();
 
 // Thiết lập autoloader
 spl_autoload_register(function ($class) {
@@ -14,64 +18,56 @@ spl_autoload_register(function ($class) {
     }
 });
 
-
 // Xử lý routing
-$url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
+$url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : 'home';
 $url = filter_var($url, FILTER_SANITIZE_URL);
-$url = explode('/', $url);
+$segments = explode('/', $url);
 
-// Xác định controller
-$controllerName = !empty($url[0]) ? ucfirst($url[0]) : 'Home';
-$controllerMethod = !empty($url[1]) ? $url[1] : 'index';
+// Xác định controller và method
+$controllerName = !empty($segments[0]) ? ucfirst($segments[0]) : 'Home';
+$method = !empty($segments[1]) ? $segments[1] : 'index';
+$params = array_slice($segments, 2);
 
 // Kiểm tra nếu là Admin route
-if ($controllerName == 'Admin') {
-    $controllerName = !empty($url[1]) ? ucfirst($url[1]) : 'Dashboard';
-    $controllerMethod = !empty($url[2]) ? $url[2] : 'index';
-    $controllerFile = '../Controllers/Admin/' . $controllerName . 'Controller.php';
-    $controllerClass = 'Controllers\\Admin\\' . $controllerName . 'Controller';
-    
-    // Kiểm tra quyền admin trước khi gọi controller
-    require_once '../middleware/AdminMiddleware.php';
-    $adminMiddleware = new \Middleware\AdminMiddleware(); // Thêm namespace
+if ($controllerName === 'Admin') {
+    require_once APP_ROOT . '/middleware/AdminMiddleware.php';
+    $adminMiddleware = new \Middleware\AdminMiddleware();
     $adminMiddleware->handle();
-    
-    // Lấy các tham số (nếu có)
-    $params = array_slice($url, 3);
+
+    $controllerName = !empty($segments[1]) ? ucfirst($segments[1]) : 'Dashboard';
+    $method = !empty($segments[2]) ? $segments[2] : 'index';
+    $params = array_slice($segments, 3);
+    $controllerFile = APP_ROOT . '/Controllers/Admin/' . $controllerName . 'Controller.php';
+    $controllerClass = 'Controllers\\Admin\\' . $controllerName . 'Controller';
 } else {
-    $controllerFile = '../Controllers/' . $controllerName . 'Controller.php';
+    $controllerFile = APP_ROOT . '/Controllers/' . $controllerName . 'Controller.php';
     $controllerClass = 'Controllers\\' . $controllerName . 'Controller';
-    
-    // Lấy các tham số (nếu có)
-    $params = array_slice($url, 2);
 }
 
-// Kiểm tra file controller tồn tại
+// Kiểm tra và gọi controller
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
-    
-    // Khởi tạo controller
+
     if (class_exists($controllerClass)) {
         $controller = new $controllerClass();
-        
-        // Kiểm tra phương thức tồn tại
-        if (method_exists($controller, $controllerMethod)) {
-            call_user_func_array([$controller, $controllerMethod], $params);
+
+        if (method_exists($controller, $method)) {
+            call_user_func_array([$controller, $method], $params);
         } else {
-            // Phương thức không tồn tại
-            require_once '../Views/layouts/header.php';
+            header('HTTP/1.0 404 Not Found');
+            require_once APP_ROOT . '/Views/layouts/header.php';
             echo '<div class="container mt-5"><div class="alert alert-danger">Phương thức không tồn tại!</div></div>';
-            require_once '../Views/layouts/footer.php';
+            require_once APP_ROOT . '/Views/layouts/footer.php';
         }
     } else {
-        // Class không tồn tại
-        require_once '../Views/layouts/header.php';
+        header('HTTP/1.0 404 Not Found');
+        require_once APP_ROOT . '/Views/layouts/header.php';
         echo '<div class="container mt-5"><div class="alert alert-danger">Controller không tồn tại!</div></div>';
-        require_once '../Views/layouts/footer.php';
+        require_once APP_ROOT . '/Views/layouts/footer.php';
     }
 } else {
-    // File không tồn tại
-    require_once '../Views/layouts/header.php';
+    header('HTTP/1.0 404 Not Found');
+    require_once APP_ROOT . '/Views/layouts/header.php';
     echo '<div class="container mt-5"><div class="alert alert-danger">Trang không tồn tại!</div></div>';
-    require_once '../Views/layouts/footer.php';
+    require_once APP_ROOT . '/Views/layouts/footer.php';
 }

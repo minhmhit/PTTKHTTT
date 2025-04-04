@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $data['title']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css">
+    <!-- <link rel="stylesheet" href="/public/css/style.css"> -->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,29 +17,29 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo BASE_URL; ?>Views/product">Sản phẩm</a>
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>product">Sản phẩm</a>
                     </li>
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo BASE_URL; ?>Views/user/profile">Hồ sơ</a>
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>user/profile">Hồ sơ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo BASE_URL; ?>Views/order/history">Lịch sử đơn hàng</a>
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>order/history">Lịch sử đơn hàng</a>
                         </li>
                         <?php if ($_SESSION['user_role'] == 'admin'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo BASE_URL; ?>Views/admin/dashboard">Quản trị</a>
+                                <a class="nav-link" href="<?php echo BASE_URL; ?>admin/dashboard">Quản trị</a>
                             </li>
                         <?php endif; ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo BASE_URL; ?>Views/user/logout">Đăng xuất</a>
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>user/logout">Đăng xuất</a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo BASE_URL; ?>Views/user/login">Đăng nhập</a>
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>user/login">Đăng nhập</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo BASE_URL; ?>Views/user/register">Đăng ký</a>
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>user/register">Đăng ký</a>
                         </li>
                     <?php endif; ?>
                 </ul>
